@@ -17,8 +17,20 @@ def index():
 
 @app.route("/list")
 def list():
+    books = db.query(Book).all()
+    return render_template('list.html', books=books)
 
-    return render_template('list.html')
+@app.route("/new", methods=['GET', 'POST'])
+def newBook():
+    return render_template('new.html')
+
+@app.route("/edit/<int:id>", methods=['GET', 'POST'])
+def editBook(id):
+    return render_template('edit.html', id=id)
+
+@app.route("/delete/<int:id>", methods=['GET', 'POST'])
+def deleteBook(id):
+    return render_template('delete.html', id=id)
 
 
 if __name__ == "__main__":

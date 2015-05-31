@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    THis is list
+    <table class="table">
+        <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price|float }}</td>
+        <td>{{ book.description }}</td>
+        <td>{{ book.created }}</td>
+        <td>actions</td>
+    </tr>   
+    {% endfor %}
+    </table>
 {% endblock %}
