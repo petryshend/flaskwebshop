@@ -13,7 +13,7 @@ db = DBSession()
 
 @app.route("/")
 def index():
-    return "Hello World!"
+    return render_template('index.html')
 
 @app.route("/list")
 def list():
