@@ -30,17 +30,32 @@ def newBook():
         newBook.description = request.form['description']
         db.add(newBook)
         db.commit()
-        flash('New book created!')
+        flash(newBook.title + ' book created!')
         return redirect(url_for('list'))
     return render_template('new.html')
 
 @app.route("/edit/<int:id>", methods=['GET', 'POST'])
 def editBook(id):
-    return render_template('edit.html', id=id)
+    book = db.query(Book).filter_by(id=id).one()
+    if request.method == 'POST':
+        book.title = request.form['title']
+        book.author = request.form['author']
+        book.price = request.form['price']
+        book.description = request.form['description']
+        db.add(book)
+        db.commit()
+        return redirect(url_for('list'))
+    return render_template('edit.html', book=book)
 
 @app.route("/delete/<int:id>", methods=['GET', 'POST'])
 def deleteBook(id):
-    return render_template('delete.html', id=id)
+    book = db.query(Book).filter_by(id=id).one()
+    if request.method == 'POST':
+        db.delete(book)
+        db.commit()
+        flash('You have deleted ' + book.title)
+        return redirect(url_for('list'))
+    return render_template('delete.html', book=book)
 
 
 if __name__ == "__main__":

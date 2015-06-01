@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    You are going to delete book {{ id }}
+    <h3>Are you sure you want to delete <em>{{ book.title }}</em>?</h3>
+    <form action="{{ url_for('deleteBook', id=book.id) }}" method="POST">
+    <button type="submit" class="btn btn-danger">Delete Book</button>
+    </form>
 {% endblock %}
