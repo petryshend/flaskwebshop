@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+    </script>
+
+    <div class="signinButton">
+        <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="939525220512-cqi1ss315n9cvujr34ef4j40qolvkihd.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+        </span>
+    </div>
+    <div id="result"></div>
+{% endblock %}

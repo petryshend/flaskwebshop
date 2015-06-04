@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import session as login_session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db_setup import Base, Book
+
+import random, string
 
 app = Flask(__name__)
 
@@ -57,6 +60,11 @@ def deleteBook(id):
         return redirect(url_for('list'))
     return render_template('delete.html', book=book)
 
+@app.route('/login')
+def showLogin():
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+    login_session['state'] = state
+    return render_template('login.html')
 
 if __name__ == "__main__":
     app.secret_key = 'dlkjal34324kjh2l3k4h'
